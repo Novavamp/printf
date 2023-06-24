@@ -209,9 +209,6 @@ int _print_float(va_list args)
 {
     double num = va_arg(args, double);
     int count = 0;
-
-    // Placeholder implementation for printing floating-point numbers
-    // Replace it with your own implementation
     char buffer[50];
     sprintf(buffer, "%f", num);
 
@@ -224,9 +221,6 @@ int _print_scientific(va_list args)
 {
     double num = va_arg(args, double);
     int count = 0;
-
-    // Placeholder implementation for printing scientific notation
-    // Replace it with your own implementation
     char buffer[50];
     sprintf(buffer, "%e", num);
 
@@ -239,9 +233,6 @@ int _print_pointer(va_list args)
 {
     void *ptr = va_arg(args, void *);
     int count = 0;
-
-    // Placeholder implementation for printing pointers
-    // Replace it with your own implementation
     char buffer[50];
     sprintf(buffer, "%p", ptr);
 
