@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
     if (format == NULL)
         return (-1);
 
-    while (format && format[i])
+    while (format[i])
     {
         if (format[i] == '%')
         {
@@ -70,12 +70,6 @@ int format_specifier(char c, va_list args)
             break;
         case 'p':
             count += _print_pointer(args);
-            break;
-        case 'l':
-            count += handle_long_specifier(args);
-            break;
-        case 'L':
-            count += handle_long_double_specifier(args);
             break;
         default:
             _putchar('%');
@@ -160,9 +154,7 @@ int _print_hex_lower(va_list args)
 
     count += print_hex(num, 'a');
 
-    return count
-
-;
+    return count;
 }
 
 int _print_hex_upper(va_list args)
@@ -170,7 +162,9 @@ int _print_hex_upper(va_list args)
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    count += print_hex(num, 'A');
+    count
+
+ += print_hex(num, 'A');
 
     return count;
 }
@@ -203,26 +197,6 @@ int _print_pointer(va_list args)
     count += _putchar('0');
     count += _putchar('x');
     count += print_hex((unsigned long int)ptr, 'a');
-
-    return count;
-}
-
-int handle_long_specifier(va_list args)
-{
-    long int num = va_arg(args, long int);
-    int count = 0;
-
-    count += print_number(num);
-
-    return count;
-}
-
-int handle_long_double_specifier(va_list args)
-{
-    long double num = va_arg(args, long double);
-    int count = 0;
-
-    count += print_float(num);
 
     return count;
 }
