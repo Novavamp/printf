@@ -91,6 +91,7 @@ int format_specifier(char c, va_list args)
 
 int print_binary(va_list list)
 {
+    unsigned int mask;
     unsigned int number = va_arg(list, unsigned int);
     int count = 0;
 
@@ -100,7 +101,7 @@ int print_binary(va_list list)
         return (1);
     }
 
-    unsigned int mask = 1 << ((sizeof(unsigned int) * 8) - 1);
+    mask = 1 << ((sizeof(unsigned int) * 8) - 1);
     int foundFirstOne = 0;
 
     for (; mask > 0; mask >>= 1)
