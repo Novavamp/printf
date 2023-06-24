@@ -100,7 +100,7 @@ int print_binary(va_list list)
         return 1;
     }
 
-    unsigned int mask = 1 << ((sizeof(unsigned int) * 8) - 1);
+    unsigned int mask = 1 << 31;
     int foundFirstOne = 0;
 
     while (mask > 0)
