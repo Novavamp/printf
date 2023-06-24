@@ -116,8 +116,6 @@ int _print_string(va_list args)
     return count;
 }
 
-/* Implement the remaining _print_* functions here */
-
 int _print_int(va_list args)
 {
     int num = va_arg(args, int);
@@ -290,7 +288,7 @@ int print_float(double num)
     int count = 0;
     char buffer[32];
 
-    sprintf(buffer, "%f", num);
+    snprintf(buffer, sizeof(buffer), "%f", num);
 
     while (*buffer)
     {
@@ -307,7 +305,7 @@ int print_scientific(double num)
     int count = 0;
     char buffer[32];
 
-    sprintf(buffer, "%e", num);
+    snprintf(buffer, sizeof(buffer), "%e", num);
 
     while (*buffer)
     {
