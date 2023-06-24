@@ -75,11 +75,14 @@ int format_specifier(char c, va_list args)
             count += _print_pointer(args);
             break;
         case 'b':
-            {
-                unsigned int num = va_arg(args, unsigned int);
-                count += print_binary(num);
-                break;
-            }
+		{
+			va_list num_list;
+    			va_copy(num_list, args);
+    			unsigned int num = va_arg(num_list, unsigned int);
+    			count += print_binary(num);
+    			va_end(num_list);
+    			break;
+		}
         default:
             _putchar('%');
             _putchar(c);
