@@ -8,6 +8,8 @@ int _printf(const char *format, ...);
 int _putchar(char c);
 int _getchar(void);
 
+int _print_binary(va_list args);
+int print_number_base(int num, int base);
 int print_number(int num);
 int format_specifier(char c, va_list args);
 int _print_char(va_list args);
