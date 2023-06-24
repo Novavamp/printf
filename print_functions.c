@@ -37,8 +37,6 @@ int _printf(const char *format, ...)
 int format_specifier(char c, va_list args)
 {
     int count = 0;
-    unsigned int num;
-	
     switch (c)
     {
         case 'c':
