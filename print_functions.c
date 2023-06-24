@@ -290,11 +290,12 @@ int print_float(double num)
 
     snprintf(buffer, sizeof(buffer), "%f", num);
 
-    while (*buffer)
+    char *ptr = buffer;
+    while (*ptr)
     {
-        _putchar(*buffer);
+        _putchar(*ptr);
         count++;
-        buffer++;
+        ptr++;
     }
 
     return count;
@@ -307,11 +308,12 @@ int print_scientific(double num)
 
     snprintf(buffer, sizeof(buffer), "%e", num);
 
-    while (*buffer)
+    char *ptr = buffer;
+    while (*ptr)
     {
-        _putchar(*buffer);
+        _putchar(*ptr);
         count++;
-        buffer++;
+        ptr++;
     }
 
     return count;
