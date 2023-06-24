@@ -167,7 +167,8 @@ int _print_hex_lower(va_list args)
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    count += _print_hex(num, 'a');
+    unsigned int num_u = (unsigned int)num;
+    count += _print_hex(num_u, 'a');
 
     return count;
 }
@@ -195,7 +196,7 @@ int _print_hex_upper(va_list args)
 
     count
 
- += print_hex(num, 'A');
+ += _print_hex(num, 'A');
 
     return count;
 }
