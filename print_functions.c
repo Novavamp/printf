@@ -44,8 +44,11 @@ int format_specifier(char c, va_list args)
             count += _print_char(args);
             break;
         case 's':
-            count += _print_string(args);
+        {
+            char *str = va_arg(args, char *);
+            count += _print_string(str);
             break;
+        }
         case 'i':
         case 'd':
             count += _print_int(args);
