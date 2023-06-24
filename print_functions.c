@@ -37,7 +37,8 @@ int _printf(const char *format, ...)
 int format_specifier(char c, va_list args)
 {
     int count = 0;
-
+    unsigned int num;
+	
     switch (c)
     {
         case 'c':
@@ -75,7 +76,8 @@ int format_specifier(char c, va_list args)
             count += _print_pointer(args);
             break;
         case 'b':
-            count += binary_helper(args);
+            num = va_arg(args, unsigned int);
+            count += binary_helper(num);
             break;
         default:
             _putchar('%');
