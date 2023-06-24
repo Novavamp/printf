@@ -64,8 +64,11 @@ int _printf(const char *format, ...)
                     printed_chars += _print_char(args);
                     break;
                 case 's':
-                    printed_chars += _print_string(str);
-                    break;
+                    {
+                        char *str = va_arg(args, char *);
+                        printed_chars += _print_string(str);
+                        break;
+                    }
                 case 'd':
                 case 'i':
                     printed_chars += _print_int(args);
