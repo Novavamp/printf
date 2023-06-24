@@ -38,7 +38,7 @@ int format_specifier(char c, va_list args)
 {
     int count = 0;
 
-    switch (c)
+    switch (C)
     {
         case 'c':
             count += _print_char(args);
@@ -88,7 +88,7 @@ int _putchar(char c)
 
 int _print_char(va_list args)
 {
-    char ch = (char) va_arg(args, int);
+    char ch = va_arg(args, char);
     return _putchar(ch);
 }
 
@@ -98,7 +98,7 @@ int _print_string(va_list args)
     int count = 0;
 
     if (str == NULL)
-        str = "(null)";
+        return (-1);
 
     while (*str)
     {
@@ -119,7 +119,7 @@ int _print_int(va_list args)
     {
         _putchar('-');
         count++;
-        num = -num;
+        num = (unsigned int)-num;
     }
 
     count += print_number(num);
