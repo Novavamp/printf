@@ -75,8 +75,11 @@ int format_specifier(char c, va_list args)
             count += _print_pointer(args);
             break;
         case 'b':
-            count += _print_binary(args);
-            break;
+            {
+                unsigned int num = va_arg(args, unsigned int);
+                count += _print_binary(num);
+                break;
+            }
         default:
             _putchar('%');
             _putchar(c);
@@ -87,14 +90,19 @@ int format_specifier(char c, va_list args)
     return count;
 }
 
-int _print_binary(va_list args)
+int _print_binary(unsigned int num)
 {
-    int num = va_arg(args, int);
-    int printed_chars = 0;
+    int count = 0;
+    unsigned int mask = 1 << (sizeof(unsigned int) * 8 - 1);
 
-    printed_chars += print_number_base(num, 2);
+    for (; mask > 0; mask >>= 1)
+    {
+        char bit = (num & mask) ? '1' : '0';
+        putchar(bit);
+        count++;
+    }
 
-    return printed_chars;
+    return count;
 }
 
 int print_number_base(int num, int base)
