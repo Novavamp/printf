@@ -46,4 +46,6 @@ The `_printf` function returns the number of characters printed to the console o
 
 ## Contributing
 
-```If you would like to contribute to this project, please open a pull request with your changes. All contributions are welcome!
+```
+If you would like to contribute to this project, please open a pull request with your changes. All contributions are welcome!
+```
