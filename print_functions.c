@@ -37,7 +37,8 @@ int _printf(const char *format, ...)
 int format_specifier(char c, va_list args)
 {
     int count = 0;
-
+    unsigned int num;
+	
     switch (c)
     {
         case 'c':
@@ -74,15 +75,10 @@ int format_specifier(char c, va_list args)
         case 'p':
             count += _print_pointer(args);
             break;
-        case 'b':
-		{
-			va_list num_list;
-    			va_copy(num_list, args);
-    			unsigned int num = va_arg(num_list, unsigned int);
-    			count += print_binary(num);
-    			va_end(num_list);
-    			break;
-		}
+	case 'b':
+            num = va_arg(args, unsigned int);
+            count += print_binary(args);
+            break;
         default:
             _putchar('%');
             _putchar(c);
@@ -116,26 +112,6 @@ int binary_helper(int value)
 	len = (1 + binary_helper(value / 2));
 	putchar((value % 2) + '0');
 	return (len);
-}
-
-int print_number_base(int num, int base)
-{
-    int printed_chars = 0;
-
-    if (num < 0)
-    {
-        _putchar('-');
-        printed_chars++;
-        num = -num;
-    }
-
-    if (num >= base)
-        printed_chars += print_number_base(num / base, base);
-
-    _putchar('0' + num % base);
-    printed_chars++;
-
-    return printed_chars;
 }
 
 int print_number(int num)
