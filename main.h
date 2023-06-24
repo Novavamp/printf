@@ -12,6 +12,7 @@ int print_number(int num);
 int format_specifier(char c, va_list args);
 int _print_char(va_list args);
 int _print_string(va_list args);
+int _print_string(char *str);
 int _print_int(va_list args);
 int _print_unsigned_int(va_list args);
 int _print_octal(va_list args);
