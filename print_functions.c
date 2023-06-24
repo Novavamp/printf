@@ -174,7 +174,7 @@ int _print_float(va_list args)
     double num = va_arg(args, double);
     int count = 0;
 
-    count += print_float(num);
+    count += _print_float(num);
 
     return count;
 }
@@ -184,7 +184,7 @@ int _print_scientific(va_list args)
     double num = va_arg(args, double);
     int count = 0;
 
-    count += print_scientific(num);
+    count += _print_scientific(num);
 
     return count;
 }
