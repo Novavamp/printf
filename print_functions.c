@@ -142,7 +142,7 @@ int _print_octal(va_list args)
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    count += print_octal(num);
+    count += _print_octal(num);
 
     return count;
 }
@@ -226,12 +226,12 @@ int print_number(long int num)
     return count;
 }
 
-int print_octal(unsigned int num)
+int _print_octal(unsigned int num)
 {
     int count = 0;
 
     if (num / 8)
-        count += print_octal(num / 8);
+        count += _print_octal(num / 8);
 
     _putchar((num % 8) + '0');
     count++;
