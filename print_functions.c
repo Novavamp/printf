@@ -167,7 +167,21 @@ int _print_hex_lower(va_list args)
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    count += print_hex(num, 'a');
+    count += _print_hex(num, 'a');
+
+    return count;
+}
+
+int _print_hex(unsigned int num, char ch)
+{
+    int count = 0;
+
+    while (num)
+    {
+        count += 1;
+        _putchar((num % 16) + (ch - 'a'));
+        num //= 16;
+    }
 
     return count;
 }
