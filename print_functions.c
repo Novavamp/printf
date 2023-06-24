@@ -90,17 +90,29 @@ int format_specifier(char c, va_list args)
     return count;
 }
 
-int _print_binary(unsigned int num)
+int print_binary(va_list list)
 {
-    unsigned int mask = 1 << (sizeof(unsigned int) * 8 - 1);
+	int number = va_arg(list, int);
 
-    for (; mask > 0; mask >>= 1)
-    {
-        char bit = (num & mask) ? '1' : '0';
-        _putchar(bit);
-    }
+	if (number == 0)
+	{
+		putchar('0');
+		return (1);
+	}
+	else if (number > 0)
+		return (binary_helper(number));
+	return (0);
+}
 
-    return (0);
+int binary_helper(int value)
+{
+	int len = 0;
+
+	if (value == 0)
+		return (0);
+	len = (1 + binary_helper(value / 2));
+	putchar((value % 2) + '0');
+	return (len);
 }
 
 int print_number_base(int num, int base)
