@@ -160,7 +160,9 @@ int _print_hex_lower(va_list args)
 
     count += print_hex(num, 'a');
 
-    return count;
+    return count
+
+;
 }
 
 int _print_hex_upper(va_list args)
@@ -288,7 +290,7 @@ int print_float(double num)
     int count = 0;
     char buffer[32];
 
-    snprintf(buffer, sizeof(buffer), "%f", num);
+    sprintf(buffer, "%f", num);
 
     char *ptr = buffer;
     while (*ptr)
@@ -306,7 +308,7 @@ int print_scientific(double num)
     int count = 0;
     char buffer[32];
 
-    snprintf(buffer, sizeof(buffer), "%e", num);
+    sprintf(buffer, "%e", num);
 
     char *ptr = buffer;
     while (*ptr)
