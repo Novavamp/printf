@@ -103,15 +103,16 @@ int print_binary(va_list list)
 	return (0);
 }
 
-int binary_helper(int value)
+int binary_helper(unsigned int value)
 {
-	int len = 0;
+    int len = 0;
 
-	if (value == 0)
-		return (0);
-	len = (1 + binary_helper(value / 2));
-	putchar((value % 2) + '0');
-	return (len);
+    if (value == 0)
+        return 0;
+
+    len = (1 + binary_helper(value / 2));
+    _putchar((value % 2) + '0');
+    return len;
 }
 
 int print_number(int num)
