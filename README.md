@@ -48,4 +48,3 @@ The `_printf` function returns the number of characters printed to the console o
 
 If you would like to contribute to this project, please open a pull request with your changes. All contributions are welcome!
 ```
-Note: The above text is written in Markdown format, suitable for documentation purposes, such as in a README file for the ALX Holberton School project.
