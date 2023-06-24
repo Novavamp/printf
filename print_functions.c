@@ -74,6 +74,9 @@ int format_specifier(char c, va_list args)
         case 'p':
             count += _print_pointer(args);
             break;
+        case 'b':
+            count += _print_binary(args);
+            break;
         default:
             _putchar('%');
             _putchar(c);
@@ -81,7 +84,37 @@ int format_specifier(char c, va_list args)
             break;
     }
 
-    return (count);
+    return count;
+}
+
+int _print_binary(va_list args)
+{
+    int num = va_arg(args, int);
+    int printed_chars = 0;
+
+    printed_chars += print_number_base(num, 2);
+
+    return printed_chars;
+}
+
+int print_number_base(int num, int base)
+{
+    int printed_chars = 0;
+
+    if (num < 0)
+    {
+        _putchar('-');
+        printed_chars++;
+        num = -num;
+    }
+
+    if (num >= base)
+        printed_chars += print_number_base(num / base, base);
+
+    _putchar('0' + num % base);
+    printed_chars++;
+
+    return printed_chars;
 }
 
 int print_number(int num)
