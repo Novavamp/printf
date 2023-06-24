@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
         if (format[i] == '%')
         {
             i++;
-            if (format[i] == '\0')
+            if (format[i] == '\0' || format_specifier(format[i], args) == -1)
                 return (-1);
             printed_chars += format_specifier(format[i], args);
         }
