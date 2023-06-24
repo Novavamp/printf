@@ -89,34 +89,26 @@ int format_specifier(char c, va_list args)
     return count;
 }
 
-int print_binary(va_list list)
+int print_binary(unsigned int num)
 {
-    unsigned int number = va_arg(list, unsigned int);
+    unsigned int mask = 1 << ((sizeof(unsigned int) * 8) - 1);
     int foundFirstOne = 0;
-    int count = 0;
 
-    if (number == 0)
+    for (; mask != 0; mask >>= 1)
     {
-        putchar('0');
-        return 1;
-    }
-
-    for (unsigned int mask = 1 << ((sizeof(unsigned int) * 8) - 1); mask != 0; mask >>= 1)
-    {
-        if ((number & mask) != 0)
+        if ((num & mask) != 0)
         {
+            _putchar('1');
             foundFirstOne = 1;
-            putchar('1');
-            count++;
+            return 1;
         }
         else if (foundFirstOne)
         {
-            putchar('0');
-            count++;
+            _putchar('0');
         }
     }
 
-    return count;
+    return foundFirstOne;
 }
 
 int binary_helper(unsigned int value)
