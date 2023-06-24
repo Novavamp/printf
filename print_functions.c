@@ -90,14 +90,14 @@ int format_specifier(char c, va_list args)
     return count;
 }
 
-void _print_binary(unsigned int num)
+int _print_binary(unsigned int num)
 {
     unsigned int mask = 1 << (sizeof(unsigned int) * 8 - 1);
 
     for (; mask > 0; mask >>= 1)
     {
         char bit = (num & mask) ? '1' : '0';
-        _putchar(bit);  // Use _putchar instead of putchar
+        _putchar(bit);
     }
 }
 
