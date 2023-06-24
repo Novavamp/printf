@@ -94,11 +94,23 @@ int _print_binary(unsigned int num)
 {
     int count = 0;
     unsigned int mask = 1 << (sizeof(unsigned int) * 8 - 1);
+    int leading_zeros = 1; 
 
     for (; mask > 0; mask >>= 1)
     {
         char bit = (num & mask) ? '1' : '0';
-        putchar(bit);
+        if (bit == '1')
+            leading_zeros = 0;
+        if (!leading_zeros)
+        {
+            putchar(bit);
+            count++;
+        }
+    }
+
+    if (count == 0)
+    {
+        putchar('0');
         count++;
     }
 
