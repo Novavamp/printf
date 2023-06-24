@@ -113,7 +113,7 @@ int _putchar(char c)
 
 int _print_char(va_list args)
 {
-    char ch = va_arg(args, char);
+    int ch = va_arg(args, int);
     return _putchar(ch);
 }
 
@@ -166,29 +166,8 @@ int _print_hex_lower(va_list args)
 {
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
-
-    while (num)
-    {
-        count += 1;
-        _putchar((num % 16) + (ch - 'a'));
-        num //= 16;
-    }
-
-    return count;
-}
-
-int _print_hex(va_list args)
-{
-    unsigned int num = va_arg(args, unsigned int);
-    int count = 0;
-    char ch = va_arg(args, char);
-
-    while (num)
-    {
-        count += 1;
-        _putchar((num % 16) + (ch - 'a'));
-        num //= 16;
-    }
+    
+    count += print_hex(num, 16, "0123456789abcdef");
 
     return count;
 }
@@ -198,9 +177,30 @@ int _print_hex_upper(va_list args)
     unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    count
+    count += print_hex(num, 16, "0123456789ABCDEF");
 
- += _print_hex(num, 'A');
+    return count;
+}
+
+int _print_octal(va_list args)
+{
+    unsigned int num = va_arg(args, unsigned int);
+    int count = 0;
+
+    count += print_hex(num, 8, "01234567");
+
+    return count;
+}
+
+int print_hex(unsigned int num, int base, const char *digits)
+{
+    int count = 0;
+
+    if (num / base)
+        count += print_hex(num / base, base, digits);
+
+    _putchar(digits[num % base]);
+    count++;
 
     return count;
 }
@@ -210,7 +210,12 @@ int _print_float(va_list args)
     double num = va_arg(args, double);
     int count = 0;
 
-    count += _print_float(num);
+    // Placeholder implementation for printing floating-point numbers
+    // Replace it with your own implementation
+    char buffer[50];
+    sprintf(buffer, "%f", num);
+
+    count += _print_string(buffer);
 
     return count;
 }
@@ -220,7 +225,12 @@ int _print_scientific(va_list args)
     double num = va_arg(args, double);
     int count = 0;
 
-    count += _print_scientific(num);
+    // Placeholder implementation for printing scientific notation
+    // Replace it with your own implementation
+    char buffer[50];
+    sprintf(buffer, "%e", num);
+
+    count += _print_string(buffer);
 
     return count;
 }
@@ -230,103 +240,12 @@ int _print_pointer(va_list args)
     void *ptr = va_arg(args, void *);
     int count = 0;
 
-    count += _putchar('0');
-    count += _putchar('x');
-    count += _print_hex((unsigned long int)ptr, 'a');
+    // Placeholder implementation for printing pointers
+    // Replace it with your own implementation
+    char buffer[50];
+    sprintf(buffer, "%p", ptr);
 
-    return count;
-}
-
-int print_number(long int num)
-{
-    int count = 0;
-
-    if (num == 0)
-    {
-        _putchar('0');
-        count++;
-    }
-    else if (num < 0)
-    {
-        _putchar('-');
-        count++;
-        num = -num;
-    }
-
-    if (num / 10)
-        count += print_number(num / 10);
-
-    _putchar((num % 10) + '0');
-    count++;
-
-    return count;
-}
-
-int _print_octal(unsigned int num)
-{
-    int count = 0;
-
-    if (num / 8)
-        count += _print_octal(num / 8);
-
-    _putchar((num % 8) + '0');
-    count++;
-
-    return count;
-}
-
-int _print_hex(unsigned int num, char base)
-{
-    int count = 0;
-    int remainder;
-
-    if (num / 16)
-        count += _print_hex(num / 16, base);
-
-    remainder = num % 16;
-
-    if (remainder < 10)
-        _putchar(remainder + '0');
-    else
-        _putchar(remainder - 10 + base);
-
-    count++;
-
-    return count;
-}
-
-int print_float(double num)
-{
-    int count = 0;
-    char buffer[32];
-
-    sprintf(buffer, "%f", num);
-
-    char *ptr = buffer;
-    while (*ptr)
-    {
-        _putchar(*ptr);
-        count++;
-        ptr++;
-    }
-
-    return count;
-}
-
-int print_scientific(double num)
-{
-    int count = 0;
-    char buffer[32];
-
-    sprintf(buffer, "%e", num);
-
-    char *ptr = buffer;
-    while (*ptr)
-    {
-        _putchar(*ptr);
-        count++;
-        ptr++;
-    }
+    count += _print_string(buffer);
 
     return count;
 }
