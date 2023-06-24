@@ -89,13 +89,13 @@ int format_specifier(char c, va_list args)
 
 int _putchar(char c)
 {
-    return (putchar(c));
+    return putchar(c);
 }
 
 int _print_char(va_list args)
 {
-    char ch = va_arg(args, int);
-    return (_putchar(ch));
+    char ch = (char) va_arg(args, int);
+    return _putchar(ch);
 }
 
 int _print_string(va_list args)
@@ -113,7 +113,7 @@ int _print_string(va_list args)
         str++;
     }
 
-    return (count);
+    return count;
 }
 
 /* Implement the remaining _print_* functions here */
@@ -132,7 +132,7 @@ int _print_int(va_list args)
 
     count += print_number(num);
 
-    return (count);
+    return count;
 }
 
 int _print_unsigned_int(va_list args)
@@ -142,7 +142,7 @@ int _print_unsigned_int(va_list args)
 
     count += print_number(num);
 
-    return (count);
+    return count;
 }
 
 int _print_octal(va_list args)
@@ -152,7 +152,7 @@ int _print_octal(va_list args)
 
     count += print_octal(num);
 
-    return (count);
+    return count;
 }
 
 int _print_hex_lower(va_list args)
@@ -162,7 +162,7 @@ int _print_hex_lower(va_list args)
 
     count += print_hex(num, 'a');
 
-    return (count);
+    return count;
 }
 
 int _print_hex_upper(va_list args)
@@ -172,7 +172,7 @@ int _print_hex_upper(va_list args)
 
     count += print_hex(num, 'A');
 
-    return (count);
+    return count;
 }
 
 int _print_float(va_list args)
@@ -182,7 +182,7 @@ int _print_float(va_list args)
 
     count += print_float(num);
 
-    return (count);
+    return count;
 }
 
 int _print_scientific(va_list args)
@@ -192,7 +192,7 @@ int _print_scientific(va_list args)
 
     count += print_scientific(num);
 
-    return (count);
+    return count;
 }
 
 int _print_pointer(va_list args)
@@ -200,390 +200,121 @@ int _print_pointer(va_list args)
     void *ptr = va_arg(args, void *);
     int count = 0;
 
-    count += print_pointer(ptr);
+    count += _putchar('0');
+    count += _putchar('x');
+    count += print_hex((unsigned long int)ptr, 'a');
 
-    return (count);
+    return count;
 }
 
-int _print_long(va_list args)
+int handle_long_specifier(va_list args)
 {
-    long num = va_arg(args, long);
-    int count = 0;
-
-    if (num < 0)
-    {
-        _putchar('-');
-        count++;
-        num = -num;
-    }
-
-    count += print_number(num);
-
-    return (count);
-}
-
-int _print_unsigned_long(va_list args)
-{
-    unsigned long num = va_arg(args, unsigned long);
+    long int num = va_arg(args, long int);
     int count = 0;
 
     count += print_number(num);
 
-    return (count);
+    return count;
 }
 
-int _print_octal_long(va_list args)
-{
-    unsigned long num = va_arg(args, unsigned long);
-    int count = 0;
-
-    count += print_octal(num);
-
-    return (count);
-}
-
-int _print_hex_lower_long(va_list args)
-{
-    unsigned long num = va_arg(args, unsigned long);
-    int count = 0;
-
-    count += print_hex(num, 'a');
-
-    return (count);
-}
-
-int _print_hex_upper_long(va_list args)
-{
-    unsigned long num = va_arg(args, unsigned long);
-    int count = 0;
-
-    count += print_hex(num, 'A');
-
-    return (count);
-}
-
-int _print_long_long(va_list args)
-{
-    long long num = va_arg(args, long long);
-    int count = 0;
-
-    if (num < 0)
-    {
-        _putchar('-');
-        count++;
-        num = -num;
-    }
-
-    count += print_number(num);
-
-    return (count);
-}
-
-int _print_unsigned_long_long(va_list args)
-{
-    unsigned long long num = va_arg(args, unsigned long long);
-    int count = 0;
-
-    count += print_number(num);
-
-    return (count);
-}
-
-int _print_octal_long_long(va_list args)
-{
-    unsigned long long num = va_arg(args, unsigned long long);
-    int count = 0;
-
-    count += print_octal(num);
-
-    return (count);
-}
-
-int _print_hex_lower_long_long(va_list args)
-{
-    unsigned long long num = va_arg(args, unsigned long long);
-    int count = 0;
-
-    count += print_hex(num, 'a');
-
-    return (count);
-}
-
-int _print_hex_upper_long_long(va_list args)
-{
-    unsigned long long num = va_arg(args, unsigned long long);
-    int count = 0;
-
-    count += print_hex(num, 'A');
-
-    return (count);
-}
-
-int _print_long_double(va_list args)
+int handle_long_double_specifier(va_list args)
 {
     long double num = va_arg(args, long double);
     int count = 0;
 
-    count += print_long_double(num);
+    count += print_float(num);
 
-    return (count);
+    return count;
 }
 
-int print_number(unsigned long long num)
+int print_number(long int num)
 {
-    unsigned long long divisor = 1;
-    int count = 0;
-
-    while (num / divisor > 9)
-        divisor *= 10;
-
-    while (divisor != 0)
-    {
-        _putchar((num / divisor) + '0');
-        count++;
-        num %= divisor;
-        divisor /= 10;
-    }
-
-    return (count);
-}
-
-int print_octal(unsigned long num)
-{
-    unsigned long octal[32];
-    int i = 0;
     int count = 0;
 
     if (num == 0)
     {
         _putchar('0');
-        return (1);
-    }
-
-    while (num != 0)
-    {
-        octal[i] = num % 8;
-        num /= 8;
-        i++;
-    }
-
-    for (i -= 1; i >= 0; i--)
-    {
-        _putchar(octal[i] + '0');
         count++;
     }
+    else if (num < 0)
+    {
+        _putchar('-');
+        count++;
+        num = -num;
+    }
 
-    return (count);
+    if (num / 10)
+        count += print_number(num / 10);
+
+    _putchar((num % 10) + '0');
+    count++;
+
+    return count;
 }
 
-int print_hex(unsigned long num, char hex_case)
+int print_octal(unsigned int num)
 {
-    char hex[32];
-    int i = 0;
     int count = 0;
 
-    if (num == 0)
-    {
-        _putchar('0');
-        return (1);
-    }
+    if (num / 8)
+        count += print_octal(num / 8);
 
-    while (num != 0)
-    {
-        int remainder = num % 16;
+    _putchar((num % 8) + '0');
+    count++;
 
-        if (remainder < 10)
-            hex[i] = remainder + '0';
-        else
-            hex[i] = remainder - 10 + hex_case;
+    return count;
+}
 
-        num /= 16;
-        i++;
-    }
+int print_hex(unsigned int num, char base)
+{
+    int count = 0;
+    int remainder;
 
-    for (i -= 1; i >= 0; i--)
-    {
-        _putchar(hex[i]);
-        count++;
-    }
+    if (num / 16)
+        count += print_hex(num / 16, base);
 
-    return (count);
+    remainder = num % 16;
+
+    if (remainder < 10)
+        _putchar(remainder + '0');
+    else
+        _putchar(remainder - 10 + base);
+
+    count++;
+
+    return count;
 }
 
 int print_float(double num)
 {
     int count = 0;
-    int integer = (int)num;
-    double fraction = num - integer;
+    char buffer[32];
 
-    if (num < 0)
+    sprintf(buffer, "%f", num);
+
+    while (*buffer)
     {
-        _putchar('-');
+        _putchar(*buffer);
         count++;
-        integer = -integer;
-        fraction = -fraction;
+        buffer++;
     }
 
-    count += print_number(integer);
-    _putchar('.');
-    count++;
-
-    for (int i = 0; i < 6; i++)
-    {
-        fraction *= 10;
-        int digit = (int)fraction;
-        _putchar(digit + '0');
-        count++;
-        fraction -= digit;
-    }
-
-    return (count);
+    return count;
 }
 
 int print_scientific(double num)
 {
     int count = 0;
-    int integer = (int)num;
-    double fraction = num - integer;
+    char buffer[32];
 
-    if (num < 0)
+    sprintf(buffer, "%e", num);
+
+    while (*buffer)
     {
-        _putchar('-');
+        _putchar(*buffer);
         count++;
-        integer = -integer;
-        fraction = -fraction;
+        buffer++;
     }
 
-    count += print_number(integer);
-    _putchar('.');
-    count++;
-
-    for (int i = 0; i < 6; i++)
-    {
-        fraction *= 10;
-        int digit = (int)fraction;
-        _putchar(digit + '0');
-        count++;
-        fraction -= digit;
-    }
-
-    _putchar('e');
-    count++;
-
-    if (num >= 1)
-    {
-        _putchar('+');
-        count++;
-    }
-    else
-    {
-        _putchar('-');
-        count++;
-    }
-
-    int exponent = 0;
-
-    while (num >= 10 || num <= -10)
-    {
-        if (num >= 10)
-        {
-            num /= 10;
-            exponent++;
-        }
-        else
-        {
-            num *= 10;
-            exponent--;
-        }
-    }
-
-    count += print_number(exponent);
-
-    return (count);
-}
-
-int print_pointer(void *ptr)
-{
-    unsigned long long num = (unsigned long long)ptr;
-    int count = 0;
-
-    _putchar('0');
-    _putchar('x');
-    count += 2;
-
-    count += print_hex(num, 'a');
-
-    return (count);
-}
-
-int handle_long_specifier(va_list args)
-{
-    char c = _getchar();
-    int count = 0;
-
-    if (c == 'd' || c == 'i')
-    {
-        long num = va_arg(args, long);
-
-        if (num < 0)
-        {
-            _putchar('-');
-            count++;
-            num = -num;
-        }
-
-        count += print_number(num);
-    }
-    else if (c == 'u')
-    {
-        unsigned long num = va_arg(args, unsigned long);
-        count += print_number(num);
-    }
-    else if (c == 'o')
-    {
-        unsigned long num = va_arg(args, unsigned long);
-        count += print_octal(num);
-    }
-    else if (c == 'x')
-    {
-        unsigned long num = va_arg(args, unsigned long);
-        count += print_hex(num, 'a');
-    }
-    else if (c == 'X')
-    {
-        unsigned long num = va_arg(args, unsigned long);
-        count += print_hex(num, 'A');
-    }
-
-    return (count);
-}
-
-int print_long_double(long double num)
-{
-    int count = 0;
-    int integer = (int)num;
-    double fraction = num - integer;
-
-    if (num < 0)
-    {
-        _putchar('-');
-        count++;
-        integer = -integer;
-        fraction = -fraction;
-    }
-
-    count += print_number(integer);
-    _putchar('.');
-    count++;
-
-    for (int i = 0; i < 6; i++)
-    {
-        fraction *= 10;
-        int digit = (int)fraction;
-        _putchar(digit + '0');
-        count++;
-        fraction -= digit;
-    }
-
-    return (count);
+    return count;
 }
