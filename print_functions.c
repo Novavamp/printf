@@ -172,9 +172,11 @@ int _print_hex_lower(va_list args)
     return count;
 }
 
-int _print_hex(unsigned int num, char ch)
+int _print_hex(va_list args)
 {
+    unsigned int num = va_arg(args, unsigned int);
     int count = 0;
+    char ch = 'a';
 
     while (num)
     {
