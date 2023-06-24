@@ -1,33 +1,44 @@
+#include <limits.h>
+#include <stdio.h>
 #include "main.h"
 
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
+ */
 int main(void)
 {
     int len;
+    int len2;
+    unsigned int ui;
+    void *addr;
 
-    len = _printf("Let's try out our custom printf function!\n");
-    _printf("Number of characters printed: %d\n", len);
-
-    _printf("Character: %c\n", 'A');
-    _printf("String: %s\n", "Hello, World!");
-    _printf("Decimal: %d\n", 12345);
-    _printf("Unsigned Decimal: %u\n", 98765);
-    _printf("Octal: %o\n", 123);
-    _printf("Lowercase Hexadecimal: %x\n", 456);
-    _printf("Uppercase Hexadecimal: %X\n", 789);
-    _printf("Floating-point: %f\n", 3.14159);
-    _printf("Scientific Notation: %e\n", 0.000123);
-    _printf("Pointer: %p\n", (void *)0x12345678);
-    _printf("Long Decimal: %ld\n", 9876543210L);
-    _printf("Long Unsigned Decimal: %lu\n", 9876543210UL);
-    _printf("Long Octal: %lo\n", 1234567890L);
-    _printf("Long Lowercase Hexadecimal: %lx\n", 1234567890L);
-    _printf("Long Uppercase Hexadecimal: %lX\n", 1234567890L);
-    _printf("Long Long Decimal: %lld\n", 123456789012345LL);
-    _printf("Long Long Unsigned Decimal: %llu\n", 123456789012345ULL);
-    _printf("Long Long Octal: %llo\n", 123456789012345ULL);
-    _printf("Long Long Lowercase Hexadecimal: %llx\n", 123456789012345ULL);
-    _printf("Long Long Uppercase Hexadecimal: %llX\n", 123456789012345ULL);
-    _printf("Long Double: %Lf\n", 3.141592653589793238462643383279502884L);
-
-    return 0;
+    len = _printf("Let's try to printf a simple sentence.\n");
+    len2 = printf("Let's try to printf a simple sentence.\n");
+    ui = (unsigned int)INT_MAX + 1024;
+    addr = (void *)0x7ffe637541f0;
+    _printf("Length:[%d, %i]\n", len, len);
+    printf("Length:[%d, %i]\n", len2, len2);
+    _printf("Negative:[%d]\n", -762534);
+    printf("Negative:[%d]\n", -762534);
+    _printf("Unsigned:[%u]\n", ui);
+    printf("Unsigned:[%u]\n", ui);
+    _printf("Unsigned octal:[%o]\n", ui);
+    printf("Unsigned octal:[%o]\n", ui);
+    _printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
+    printf("Unsigned hexadecimal:[%x, %X]\n", ui, ui);
+    _printf("Character:[%c]\n", 'H');
+    printf("Character:[%c]\n", 'H');
+    _printf("String:[%s]\n", "I am a string !");
+    printf("String:[%s]\n", "I am a string !");
+    _printf("Address:[%p]\n", addr);
+    printf("Address:[%p]\n", addr);
+    len = _printf("Percent:[%%]\n");
+    len2 = printf("Percent:[%%]\n");
+    _printf("Len:[%d]\n", len);
+    printf("Len:[%d]\n", len2);
+    _printf("Unknown:[%r]\n");
+    printf("Unknown:[%r]\n");
+    return (0);
 }
