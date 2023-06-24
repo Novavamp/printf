@@ -94,6 +94,7 @@ int print_binary(va_list list)
     unsigned int mask;
     unsigned int number = va_arg(list, unsigned int);
     int count = 0;
+    int foundFirstOne = 0;
 
     if (number == 0)
     {
@@ -102,7 +103,6 @@ int print_binary(va_list list)
     }
 
     mask = 1 << ((sizeof(unsigned int) * 8) - 1);
-    int foundFirstOne = 0;
 
     for (; mask > 0; mask >>= 1)
     {
