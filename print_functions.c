@@ -77,7 +77,7 @@ int format_specifier(char c, va_list args)
         case 'b':
             {
                 unsigned int num = va_arg(args, unsigned int);
-                count += _print_binary(num);
+                count += print_binary(num);
                 break;
             }
         default:
