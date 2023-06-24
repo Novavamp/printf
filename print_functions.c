@@ -162,12 +162,16 @@ int _print_unsigned_int(va_list args)
     return count;
 }
 
-int _print_octal(va_list args)
+int _print_octal(int num)
 {
-    unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    count += _print_octal(num);
+    while (num)
+    {
+        count += 1;
+        _putchar((num % 8) + '0');
+        num //= 8;
+    }
 
     return count;
 }
