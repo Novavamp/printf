@@ -64,7 +64,7 @@ int _printf(const char *format, ...)
                     printed_chars += _print_char(args);
                     break;
                 case 's':
-                    printed_chars += _print_string(args);
+                    printed_chars += _print_string(str);
                     break;
                 case 'd':
                 case 'i':
