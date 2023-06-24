@@ -99,6 +99,8 @@ int _print_binary(unsigned int num)
         char bit = (num & mask) ? '1' : '0';
         _putchar(bit);
     }
+
+    return (0);
 }
 
 int print_number_base(int num, int base)
