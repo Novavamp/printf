@@ -91,33 +91,32 @@ int format_specifier(char c, va_list args)
 
 int print_binary(va_list list)
 {
+    unsigned int mask;
     unsigned int number = va_arg(list, unsigned int);
     int count = 0;
+    int foundFirstOne = 0;
 
     if (number == 0)
     {
         putchar('0');
-        return 1;
+        return (1);
     }
 
-    unsigned int mask = 1 << 31;
-    int foundFirstOne = 0;
+    mask = 1 << ((sizeof(unsigned int) * 8) - 1);
 
-    while (mask > 0)
+    for (; mask > 0; mask >>= 1)
     {
         if ((number & mask) != 0)
         {
-            foundFirstOne = 1;
             putchar('1');
             count++;
+            foundFirstOne = 1;
         }
         else if (foundFirstOne)
         {
             putchar('0');
             count++;
         }
-
-        mask >>= 1;
     }
 
     return count;
