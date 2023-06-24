@@ -164,14 +164,14 @@ int _print_unsigned_int(va_list args)
 
 int _print_hex_lower(va_list args)
 {
-    unsigned int num_u = va_arg(args, unsigned int);
+    unsigned int num = va_arg(args, unsigned int);
     int count = 0;
 
-    while (num_u)
+    while (num)
     {
         count += 1;
-        _putchar((num_u % 16) + (ch - 'a'));
-        num_u //= 16;
+        _putchar((num % 16) + (ch - 'a'));
+        num //= 16;
     }
 
     return count;
@@ -179,15 +179,15 @@ int _print_hex_lower(va_list args)
 
 int _print_hex(va_list args)
 {
-    unsigned int num_u = va_arg(args, unsigned int);
+    unsigned int num = va_arg(args, unsigned int);
     int count = 0;
     char ch = va_arg(args, char);
 
-    while (num_u)
+    while (num)
     {
         count += 1;
-        _putchar((num_u % 16) + (ch - 'a'));
-        num_u //= 16;
+        _putchar((num % 16) + (ch - 'a'));
+        num //= 16;
     }
 
     return count;
@@ -232,7 +232,7 @@ int _print_pointer(va_list args)
 
     count += _putchar('0');
     count += _putchar('x');
-    count += print_hex((unsigned long int)ptr, 'a');
+    count += _print_hex((unsigned long int)ptr, 'a');
 
     return count;
 }
@@ -275,13 +275,13 @@ int _print_octal(unsigned int num)
     return count;
 }
 
-int print_hex(unsigned int num, char base)
+int _print_hex(unsigned int num, char base)
 {
     int count = 0;
     int remainder;
 
     if (num / 16)
-        count += print_hex(num / 16, base);
+        count += _print_hex(num / 16, base);
 
     remainder = num % 16;
 
