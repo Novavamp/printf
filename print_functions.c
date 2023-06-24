@@ -164,26 +164,30 @@ int _print_unsigned_int(va_list args)
 
 int _print_hex_lower(va_list args)
 {
-    unsigned int num = va_arg(args, unsigned int);
+    unsigned int num_u = va_arg(args, unsigned int);
     int count = 0;
 
-    unsigned int num_u = (unsigned int)num;
-    count += _print_hex(num_u, 'a');
+    while (num_u)
+    {
+        count += 1;
+        _putchar((num_u % 16) + (ch - 'a'));
+        num_u //= 16;
+    }
 
     return count;
 }
 
 int _print_hex(va_list args)
 {
-    unsigned int num = va_arg(args, unsigned int);
+    unsigned int num_u = va_arg(args, unsigned int);
     int count = 0;
-    char ch = 'a';
+    char ch = va_arg(args, char);
 
-    while (num)
+    while (num_u)
     {
         count += 1;
-        _putchar((num % 16) + (ch - 'a'));
-        num //= 16;
+        _putchar((num_u % 16) + (ch - 'a'));
+        num_u //= 16;
     }
 
     return count;
