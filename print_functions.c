@@ -38,7 +38,7 @@ int format_specifier(char c, va_list args)
 {
     int count = 0;
 
-    switch (C)
+    switch (c)
     {
         case 'c':
             count += _print_char(args);
