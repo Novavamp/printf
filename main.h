@@ -8,6 +8,7 @@ int _printf(const char *format, ...);
 int _putchar(char c);
 int _getchar(void);
 
+int format_specifier(char c, va_list args);
 int _print_char(va_list args);
 int _print_string(va_list args);
 int _print_int(va_list args);
