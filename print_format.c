@@ -1,21 +1,18 @@
 #include "main.h"
 
 /**
- * _printf - prints formatted output
- * @format: a string containing format specifiers
- * @...: variadic arguments corresponding to the format specifiers
- * print_str: Prints the string s
- * Return: the total number of characters printed
+ * print_str - Prints the string with special handling for non-printable characters
+ * @args: Variable argument list
+ * Return: Number of characters printed
  */
 int print_str(va_list args)
 {
     int length = 0;
     char *str = va_arg(args, char *);
-    char *hex_escape = "\\x";
 
     if (str == NULL)
     {
-        length += printf("(null)");
+        length += _printf("(null)");
     }
     else
     {
@@ -31,7 +28,7 @@ int print_str(va_list args)
                 putchar('\\');
                 putchar('x');
                 length += 2;
-                length += printf("%02X", *str);
+                length += _printf("%02X", (unsigned char)*str);
             }
             str++;
         }
@@ -40,6 +37,12 @@ int print_str(va_list args)
     return length;
 }
 
+/**
+ * _printf - Prints formatted output
+ * @format: A string containing format specifiers
+ * @...: Variadic arguments corresponding to the format specifiers
+ * Return: The total number of characters printed
+ */
 int _printf(const char *format, ...)
 {
     va_list args;
@@ -79,10 +82,11 @@ int _printf(const char *format, ...)
                 }
             }
 
-            if (format[i] != format_functions[j].specifier)
+            if (j == array_length)
             {
-                putchar(format[--i]);
-                length++;
+                putchar('%');
+                putchar(format[i]);
+                length += 2;
             }
         }
 
@@ -91,5 +95,5 @@ int _printf(const char *format, ...)
 
     va_end(args);
 
-    return (length);
+    return length;
 }
