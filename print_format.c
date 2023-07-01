@@ -12,7 +12,7 @@ int print_str(va_list args)
 
     if (str == NULL)
     {
-        length += _printf("(null)");
+        length += _printf("(null)"); /* Print "(null)" using _printf */
     }
     else
     {
@@ -20,7 +20,7 @@ int print_str(va_list args)
         {
             if (*str >= 32 && *str < 127)
             {
-                putchar(*str);
+                putchar(*str); /* Print printable characters using putchar */
                 length++;
             }
             else
@@ -28,7 +28,7 @@ int print_str(va_list args)
                 putchar('\\');
                 putchar('x');
                 length += 2;
-                length += _printf("%02X", (unsigned char)*str);
+                length += _printf("%02X", (unsigned char)*str); /* Print non-printable characters as \x followed by hexadecimal value */
             }
             str++;
         }
@@ -66,7 +66,7 @@ int _printf(const char *format, ...)
     {
         if (format[i] != '%')
         {
-            putchar(format[i]);
+            putchar(format[i]); /* Print regular characters using putchar */
             length++;
         }
         else
@@ -77,14 +77,14 @@ int _printf(const char *format, ...)
             {
                 if (format[i] == format_functions[j].specifier)
                 {
-                    length += format_functions[j].print(args);
+                    length += format_functions[j].print(args); /* Call the corresponding print function for the specifier */
                     break;
                 }
             }
 
             if (j == array_length)
             {
-                putchar('%');
+                putchar('%'); /* Print '%' character if specifier not found */
                 putchar(format[i]);
                 length += 2;
             }
